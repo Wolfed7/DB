@@ -1,0 +1,26 @@
+﻿@{
+	ViewData["Title"] = "Insert result";
+}
+@model int
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<h2>Результат запроса</h2>
+		@if (TempData["alertMessage"] != null)
+		{
+			<label class="error">@TempData["alertMessage"]</label>
+		}
+		else
+		{
+			//<p>@Convert.ToString(@Model) запис(ь/и/ей) обработано.</p>
+         <p>Заказ добавлен.</p>
+		}
+	</div>
+</body>
+</html>

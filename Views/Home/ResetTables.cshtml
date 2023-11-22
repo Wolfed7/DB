@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Reset result";
+}
+
+@if (TempData["alertMessage"] != null)
+{
+   <label class="error">@TempData["alertMessage"]</label>
+}
+else
+{
+   <p>Данные восстановлены</p>
+}

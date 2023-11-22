@@ -1,0 +1,108 @@
+﻿@{
+	ViewData["Title"] = "Main form";
+}
+
+@model (List<SelectListItem>, List<SelectListItem>)
+
+<style>
+	table {
+		border: 1px solid black;
+		border-collapse: separate;
+		border-spacing: 8px 8px;
+	}
+</style>
+
+<h2> Запрос 1 </h2>
+<h5> Получить информацию о последней цене деталей, которые были поставлены для указанного изделия.</h5>
+
+<form method="post" action="Home/Query">
+	<label>Изделие: </label>
+   @if (TempData["alertIzd"] != null)
+	{
+		<label class="error">@TempData["alertIzd"]</label>
+	}
+	else
+	{
+	   @Html.DropDownList("n_izd", Model.Item1)
+	}
+	<br /> <br />
+	<input type="submit" value="Получить" />
+
+</form>
+<br />
+
+<h2> Запрос 2 </h2>
+<h5> Вставить заказ с указанными параметрами. </h5>
+
+<br />
+
+<form method="post" action="Home/QueryUpdate">
+	<table>
+@* 		<tr>
+			<td>  <label>Номер заказа: </label>         </td>
+			<td>	 <input name="n_real" value="Rx" />    </td>
+		</tr> *@
+
+		<tr>
+			<td>  <label>Номер изделия: </label>     </td>
+			<td>
+            @if (TempData["alertIzd"] != null)
+				{
+               <label class="error">@TempData["alertIzd"]</label>
+				}
+				else
+				{
+					@Html.DropDownList("n_izd", Model.Item1)
+				}
+			</td>
+		</tr>
+
+		<tr>
+			<td>     <label>Номер покупателя: </label>         </td>
+			<td>
+            @if (TempData["alertCl"] != null)
+				{
+               <label class="error">@TempData["alertCl"]</label>
+				}
+				else
+				{
+					@Html.DropDownList("n_cl", Model.Item2)
+				}
+			</td>
+		</tr>
+
+		<tr>
+			<td>   <label>Дата заказа: </label>              </td>
+			<td>	  <input type="date" name="date_order" value="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.ToString("yyyy-MM-dd")" no />    </td>
+		</tr>
+
+		<tr>
+			<td>    <label>Дата оплаты: </label>           </td>
+			<td>	   <input type="date" name="date_pay" max="@DateTime.Now.ToString("yyyy-MM-dd")" />   </td>
+		</tr>
+
+		<tr>
+			<td>   <label>Дата отправки заказа: </label>   </td>
+			<td>	  <input type="date" name="date_ship" max="@DateTime.Now.ToString("yyyy-MM-dd")" />  </td>
+		</tr>
+
+		<tr>
+			<td>   	<label>Количество изделий: </label>     </td>
+			<td>	  	<input type="number" min="1" name="kol" value="100" />  </td>
+		</tr>
+
+		<tr>
+			<td>   <label>Отпускная цена изделия: </label>     </td>
+			<td>	  <input type="number" min="1" name="cost" value="10" />    </td>
+		</tr>
+	</table>  <br />
+	<input type="submit" value="Внести заказ" />
+</form>
+<br />
+
+<h2> Сброс </h2>
+<h5> Восстановить эталонные значения базы данных. </h5>
+
+<form method="post" action="Home/ResetTables">
+	<input type="submit" value="Восстановить" />
+</form>
