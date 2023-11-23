@@ -258,8 +258,9 @@ public class DataBaseHandler
 
                      DROP SEQUENCE rea;
                      CREATE SEQUENCE rea 
-                     START 28
-                     MAXVALUE 99999;";
+                     START 1
+                     MAXVALUE 99999;
+                     SELECT setval('rea', 27)";
 
 		_connection.Open();
 		using (_command = new NpgsqlCommand(command, _connection))

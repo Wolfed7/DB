@@ -35,21 +35,37 @@
 			else
 			{
 				<table>
-					<tr>
+					<tr class="gray_tr">
 						@foreach (DataColumn column in Model.Columns)
 						{
 							<th>@column.ColumnName</th>
 						}
 					</tr>
 
-					@foreach (DataRow row in Model.Rows)
-					{
-						<tr>
-							@foreach (DataColumn column in Model.Columns)
-							{
-								<td>@row[column.ColumnName]</td>
-							}
-						</tr>
+               @for (int i = 0; i < Model.Rows.Count; i++)
+               {
+                  var row = Model.Rows[i];
+
+                  if(i % 2 == 1)
+                  {
+                     <tr class="gray_tr">
+                        @foreach (DataColumn column in Model.Columns)
+                        {
+
+                           <td>@row[column.ColumnName]</td>
+                        }
+                     </tr>
+                  }
+                  else
+                  {
+                     <tr>
+                        @foreach (DataColumn column in Model.Columns)
+                        {
+
+                           <td>@row[column.ColumnName]</td>
+                        }
+                     </tr>
+                  }
 					}
 				</table>
 			}
